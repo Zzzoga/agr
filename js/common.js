@@ -80,6 +80,32 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 		
 	maskPhone('input[type="tel"]')
+
+	// ACCORDEON FUNC
+	if (document.querySelector('.accordeon__header') != null) {
+		document.querySelectorAll('.accordeon__list .accordeon:nth-child(1)').forEach(item => {
+			item.classList.add('active')
+			item.querySelector('.accordeon__body').style.height = item.querySelector('.accordeon__body__inner').clientHeight + 'px'
+		})
+		
+		document.querySelectorAll('.accordeon__header').forEach(item => {
+			item.addEventListener('click', e => {
+				e.preventDefault()
+				if (!e.target.closest('.accordeon').classList.contains('active')) {
+					e.target.closest('.accordeon__list').querySelectorAll('.accordeon').forEach(item => {
+						item.classList.remove('active')
+						item.querySelector('.accordeon__body').style.height = '0px'
+					})
+					e.target.closest('.accordeon').classList.add('active')
+					e.target.closest('.accordeon').querySelector('.accordeon__body').style.height = e.target.closest('.accordeon').querySelector('.accordeon__body__inner').clientHeight + 'px'
+				} else {
+					e.target.closest('.accordeon').classList.remove('active')
+					e.target.closest('.accordeon').querySelector('.accordeon__body').style.height = '0px'
+				}
+			})
+		})
+	}
+
 })
 
 
